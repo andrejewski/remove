@@ -1,0 +1,20 @@
+{
+  "name": "Prime Time",
+  "short_name": "Prime Time",
+  "start_url": "/prime-time/?utm_source=a2hs",
+  "background_color": "#a6c9e7",
+  "display": "fullscreen",
+  "scope": "/prime-time/",
+  "icons": [
+    {
+      "src": "icons/medium.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/large.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
