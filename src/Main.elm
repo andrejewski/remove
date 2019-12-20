@@ -1,17 +1,15 @@
-module Main exposing (Model)
+module Main exposing (main)
 
 import Array exposing (Array)
 import Browser
 import Browser.Dom
 import Browser.Events exposing (onKeyDown)
-import Html exposing (..)
+import Html exposing (Attribute, Html, a, article, b, br, button, div, h1, h2, header, p, span, text)
 import Html.Attributes exposing (class, href, style)
 import Html.Events exposing (onClick)
 import Json.Decode as Decode
 import List
-import Random exposing (Generator)
 import Task
-import Time exposing (Posix)
 
 
 keyDecoder : Decode.Decoder String
@@ -225,6 +223,7 @@ E         xb
 """
 
 
+stageDebug : String
 stageDebug =
     """
 bbbbbbbbbbbbbbbbb
@@ -237,6 +236,7 @@ bbbbbbbbbbbbbbbbb
     """
 
 
+stageHoles : String
 stageHoles =
     """
 E bbbbbbbbbbb E
@@ -394,7 +394,7 @@ rawLevels =
     --   , controller = defaultController
     --   , stage = stage3
     --   }
-    , { title = "Oppsite day"
+    , { title = "Opposite day"
       , controller = mapController (\x -> Move (reverseDirection x))
       , stage = stage4
       }
@@ -430,7 +430,7 @@ rawLevels =
                 )
       , stage = stage9
       }
-    , { title = "Disobediance"
+    , { title = "Disobedience"
       , controller =
             indexedMapController
                 (\i x ->
@@ -687,21 +687,8 @@ type Msg
     | UpdateViewPort Int Int
 
 
-concatOrError : Result String a -> Result String (List a) -> Result String (List a)
-concatOrError result acc =
-    case ( acc, result ) of
-        ( Ok list, Ok item ) ->
-            Ok (list ++ [ item ])
-
-        ( Err err, _ ) ->
-            Err err
-
-        ( _, Err err ) ->
-            Err err
-
-
 init : Int -> ( Model, Cmd Msg )
-init flags =
+init _ =
     let
         levels =
             rawLevels
@@ -1012,10 +999,10 @@ tileSize width total viewPort =
         maxSize =
             min tileWidth tileHeight
 
-        damppening =
+        dampening =
             0.8
     in
-    maxSize * damppening
+    maxSize * dampening
 
 
 plural : String -> Int -> String

@@ -1,10 +1,11 @@
 {
-  "dependencies": {
-    "elm-format": "^0.8.2"
-  },
+  "dependencies": {},
   "scripts": {
-    "debug": "elm make src/Main.elm --output=elm.js",
-    "build": "elm make --optimize src/Main.elm --output=elm.js",
+    "debug": "elm make src/Main.elm --output elm.js",
+    "build": "elm make --optimize src/Main.elm --output elm.js",
     "format": "elm-format src/ --yes"
+  },
+  "devDependencies": {
+    "elm-format": "^0.8.2"
   }
 }
