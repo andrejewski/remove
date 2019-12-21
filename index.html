@@ -1,343 +1,367 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>Re:Move</title>
+    <meta name="description" content="Move it or lose your it (your mind)" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="author" content="Chris Andrejewski" />
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      * {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+          Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+          'Segoe UI Symbol';
+        box-sizing: border-box;
+      }
 
-<head>
-  <title>Re:Move</title>
-  <meta name="description" content="Move it or lose your it (your mind)">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-  <meta name="author" content="Chris Andrejewski">
-  <link rel="manifest" href="manifest.json">
-  <style>
-    * {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      box-sizing: border-box;
-    }
+      body {
+        margin: 0px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #031108;
+        touch-action: manipulation;
+      }
 
-    body {
-      margin: 0px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #031108;
-    }
+      .home {
+        text-align: center;
+      }
 
-    .home {
-      text-align: center;
-    }
+      .background {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: stretch;
+      }
 
-    .background {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      align-self: stretch;
-    }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .overlay-content {
+        background-color: rgba(0, 0, 0, 0.7);
+        flex: 1;
+        padding: 2vw 0;
+      }
 
-    .overlay-content {
-      background-color: rgba(0, 0, 0, 0.7);
-      flex: 1;
-      padding: 2vw 0;
-    }
+      .title {
+        font-size: 8vw;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+        color: #fff;
+        margin: 0px;
+      }
 
-    .title {
-      font-size: 8vw;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-      color: #fff;
-      margin: 0px;
-    }
+      .score {
+        font-size: 6vw;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        color: #fff;
+        margin: 0px;
+        max-width: 90vw;
+        margin: 0px auto;
+      }
 
-    .score {
-      font-size: 6vw;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      color: #fff;
-      margin: 0px;
-      max-width: 90vw;
-      margin: 0px auto;
-    }
+      .game .subject {
+        font-size: 8vw;
+        font-weight: bold;
+        text-align: center;
+        margin: 0px;
+        padding: 1vw;
+      }
 
-    .game .subject {
-      font-size: 8vw;
-      font-weight: bold;
-      text-align: center;
-      margin: 0px;
-      padding: 1vw;
-    }
+      .button {
+        position: relative;
+        top: 0px;
+        border: none;
+        font-family: inherit;
+        font-weight: bold;
+        font-size: 3vw;
+        line-height: 2;
+        padding: 0px 2vw;
+        text-transform: uppercase;
+        border-radius: 2px;
+        text-align: center;
+        transition: 0.1s all linear;
+        cursor: pointer;
+        outline: none;
+      }
 
-    .button {
-      position: relative;
-      top: 0px;
-      border: none;
-      font-family: inherit;
-      font-weight: bold;
-      font-size: 3vw;
-      line-height: 2;
-      padding: 0px 2vw;
-      text-transform: uppercase;
-      border-radius: 2px;
-      text-align: center;
-      transition: 0.1s all linear;
-      cursor: pointer;
-      outline: none;
-    }
+      .hover .button:hover {
+        top: -3px;
+      }
 
-    .hover .button:hover {
-      top: -3px;
-    }
+      .button-primary {
+        background-color: yellow;
+        color: #000;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0px rgba(255, 255, 255, 0.2);
+        text-shadow: 0 1px rgb(246, 255, 197);
+      }
 
-    .button-primary {
-      background-color: yellow;
-      color: #000;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0px rgba(255, 255, 255, 0.2);
-      text-shadow: 0 1px rgb(246, 255, 197);
-    }
+      .hover .button-primary:hover {
+        background-color: #fdff5f;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+        text-shadow: none;
+      }
 
-    .hover .button-primary:hover {
-      background-color: #fdff5f;
-      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-      text-shadow: none;
-    }
+      .button-secondary {
+        background-color: #ffffff;
+        color: #000;
+      }
 
-    .button-secondary {
-      background-color: #ffffff;
-      color: #000;
-    }
+      .button-set {
+        margin: 0px;
+        padding-top: 1.5vw;
+      }
 
-    .button-set {
-      margin: 0px;
-      padding-top: 1.5vw;
-    }
+      .button-set .button {
+        margin: 0vw 1.5vw;
+      }
 
-    .button-set .button {
-      margin: 0vw 1.5vw;
-    }
+      .count-down {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        background-color: rgba(0, 0, 0, 0.1);
+        transition: all 0.25s linear;
+      }
 
-    .count-down {
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      right: 0px;
-      background-color: rgba(0, 0, 0, 0.1);
-      transition: all 0.25s linear;
-    }
+      .hint {
+        text-align: center;
+        opacity: 0.7;
+        margin: 0px;
+        padding: 1vw;
+      }
 
-    .hint {
-      text-align: center;
-      opacity: 0.7;
-      margin: 0px;
-      padding: 1vw;
-    }
+      .info {
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.75);
+      }
 
-    .info {
-      flex-direction: column;
-      background-color: rgba(255, 255, 255, 0.75);
-    }
+      .info header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.75);
+        height: 7vw;
+        display: flex;
+        align-items: center;
+        padding: 0 3vw;
+        text-transform: uppercase;
+        font-size: 3vw;
+        font-weight: bold;
+        color: #333;
+        cursor: pointer;
+      }
 
-    .info header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(255, 255, 255, 0.75);
-      height: 7vw;
-      display: flex;
-      align-items: center;
-      padding: 0 3vw;
-      text-transform: uppercase;
-      font-size: 3vw;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-    }
+      .hover .info header:hover {
+        background-color: #fff;
+      }
 
-    .hover .info header:hover {
-      background-color: #fff;
-    }
+      .info article {
+        padding: 7vw 3vw;
+        overflow: auto;
+      }
 
-    .info article {
-      padding: 7vw 3vw;
-      overflow: auto;
-    }
+      .info article h1,
+      .info article h2,
+      .info article p {
+        margin: 0;
+        padding: 0.5vw 0;
+      }
 
-    .info article h1,
-    .info article h2,
-    .info article p {
-      margin: 0;
-      padding: 0.5vw 0;
-    }
+      .info article h1 {
+        font-size: 5vw;
+        color: #123;
+      }
 
-    .info article h1 {
-      font-size: 5vw;
-      color: #123;
-    }
+      .info article h2 {
+        font-size: 3vw;
+        color: #333;
+      }
 
-    .info article h2 {
-      font-size: 3vw;
-      color: #333;
-    }
+      .info article p {
+        font-size: 2vw;
+        color: #555;
+      }
 
-    .info article p {
-      font-size: 2vw;
-      color: #555;
-    }
+      .info article a {
+        text-decoration: underline;
+        color: #345;
+      }
 
-    .info article a {
-      text-decoration: underline;
-      color: #345;
-    }
+      .tiles {
+        white-space: nowrap;
+      }
 
-    .tiles {
-      white-space: nowrap;
-    }
+      .tile {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 2px;
+      }
 
-    .tile {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin: 2px;
-    }
+      .tile--floor {
+        border: 3px solid #fff;
+      }
 
-    .tile--floor {
-      border: 3px solid #fff;
-    }
+      .tile--floor.tile--active {
+        background-color: #fff;
+      }
 
-    .tile--floor.tile--active {
-      background-color: #fff;
-    }
+      .tile--start {
+        border: 3px solid #08f;
+      }
 
-    .tile--start {
-      border: 3px solid #08f;
-    }
+      .tile--start.tile--active {
+        background-color: #08f;
+      }
 
-    .tile--start.tile--active {
-      background-color: #08f;
-    }
+      .tile--block {
+        border: 3px solid #5d5a5a;
+      }
 
-    .tile--block {
-      border: 3px solid #5d5a5a;
-    }
+      .tile--block.tile--active {
+        background-color: #5d5a5a;
+      }
 
-    .tile--block.tile--active {
-      background-color: #5d5a5a;
-    }
+      .tile--death {
+        background-color: #000;
+        opacity: 0;
+      }
 
-    .tile--death {
-      background-color: #000;
-      opacity: 0;
-    }
+      .tile--end {
+        border: 3px solid #30e330;
+      }
 
-    .tile--end {
-      border: 3px solid #30e330;
-    }
+      .tile--end.tile--active {
+        background-color: #30e330;
+      }
 
-    .tile--end.tile--active {
-      background-color: #30e330;
-    }
+      .level-title {
+        font-size: 15px;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+        color: #a0b49d;
+        margin: 0px 0px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-    .level-title {
-      font-size: 15px;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-      color: #a0b49d;
-      margin: 0px 0px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+      .level-title b {
+        flex: 1;
+      }
 
-    .level-title b {
-      flex: 1;
-    }
+      .level-title span {
+        display: inline-block;
+        padding-left: 10px;
+      }
 
-    .level-title span {
-      display: inline-block;
-      padding-left: 10px;
-    }
+      .dpad {
+        position: fixed;
+        right: 5vmin;
+        bottom: 5vmin;
+        border-radius: 40%;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 40vmin;
+        height: 40vmin;
+        overflow: hidden;
+        transform: rotate(45deg);
+        z-index: 100;
+      }
 
-    .dpad {
-      position: fixed;
-      right: 5vmin;
-      bottom: 5vmin;
-      border-radius: 40%;
-      background-color: rgba(0, 0, 0, 0.3);
-      width: 40vmin;
-      height: 40vmin;
-      overflow: hidden;
-      transform: rotate(45deg);
-      z-index: 100;
-    }
+      .dpad-button {
+        display: inline-block;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.4);
+        color: transparent;
+        width: 19vmin;
+        height: 19vmin;
+        padding: 0px;
+        margin: 1vmin;
+        outline: none;
+        border-radius: 20%;
+      }
 
-    .dpad-button {
-      display: inline-block;
-      border: none;
-      background-color: rgba(255, 255, 255, 0.4);
-      color: transparent;
-      width: 19vmin;
-      height: 19vmin;
-      padding: 0px;
-      margin: 1.00vmin;
-      outline: none;
-      border-radius: 20%;
-    }
+      .dpad-button:active {
+        background-color: #fff;
+      }
 
-    .dpad-button:active {
-      background-color: #fff;
-    }
+      .dpad-up {
+        margin: 0 1vmin 1vmin 0;
+      }
 
-    .dpad-up {
-      margin: 0 1.00vmin 1.00vmin 0;
-    }
+      .dpad-left {
+        margin: 1vmin 1vmin 0 0;
+      }
 
-    .dpad-left {
-      margin: 1.00vmin 1.00vmin 0 0;
-    }
+      .dpad-right {
+        margin: 0 0 1vmin 1vmin;
+      }
 
-    .dpad-right {
-      margin: 0 0 1.00vmin 1.00vmin;
-    }
+      .dpad-down {
+        margin: 1vmin 0 0 1vmin;
+      }
+    </style>
+  </head>
 
-    .dpad-down {
-      margin: 1.00vmin 0 0 1.00vmin;
-    }
-  </style>
-</head>
+  <body>
+    <div id="root"></div>
+    <script src="elm.js"></script>
+    <script>
+      // HACK: Enable hover styles on non-touch devices
+      if (!('ontouchstart' in window)) {
+        document.body.className = 'hover'
+      }
 
-<body>
-  <div id='root'></div>
-  <script src='elm.js'></script>
-  <script>
-    // HACK: Enable hover styles on non-touch devices
-    if (!('ontouchstart' in window)) {
-      document.body.className = 'hover'
-    }
-
-    Elm.Main.init({
-      node: document.getElementById('root'),
-      flags: 0
-    })
-  </script>
-  <script>(function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-43674193-3', 'auto'); ga('send', 'pageview');</script>
-</body>
-
+      Elm.Main.init({
+        node: document.getElementById('root'),
+        flags: 0
+      })
+    </script>
+    <script>
+      ;(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r
+        ;(i[r] =
+          i[r] ||
+          function () {
+            ;(i[r].q = i[r].q || []).push(arguments)
+          }),
+          (i[r].l = 1 * new Date())
+        ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+        a.async = 1
+        a.src = g
+        m.parentNode.insertBefore(a, m)
+      })(
+        window,
+        document,
+        'script',
+        '//www.google-analytics.com/analytics.js',
+        'ga'
+      )
+      ga('create', 'UA-43674193-3', 'auto')
+      ga('send', 'pageview')
+    </script>
+  </body>
 </html>
