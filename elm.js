@@ -5259,7 +5259,7 @@ var author$project$Main$rawLevels = _List_fromArray(
 					author$project$Main$reverseDirection(x));
 			}),
 		c: author$project$Main$stage4,
-		b: 'Oppsite day'
+		b: 'Opposite day'
 	},
 		{
 		a: author$project$Main$mapController(
@@ -5317,7 +5317,7 @@ var author$project$Main$rawLevels = _List_fromArray(
 						author$project$Main$reverseDirection(x)) : author$project$Main$NoOp);
 				})),
 		c: author$project$Main$stage4,
-		b: 'Disobediance'
+		b: 'Disobedience'
 	},
 		{
 		a: author$project$Main$indexedMapController(

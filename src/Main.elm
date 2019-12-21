@@ -394,7 +394,7 @@ rawLevels =
     --   , controller = defaultController
     --   , stage = stage3
     --   }
-    , { title = "Oppsite day"
+    , { title = "Opposite day"
       , controller = mapController (\x -> Move (reverseDirection x))
       , stage = stage4
       }
@@ -430,7 +430,7 @@ rawLevels =
                 )
       , stage = stage9
       }
-    , { title = "Disobediance"
+    , { title = "Disobedience"
       , controller =
             indexedMapController
                 (\i x ->
