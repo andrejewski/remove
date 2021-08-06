@@ -337,7 +337,7 @@ dedupidity : MoveOutput -> Array Direction -> MoveOutput
 dedupidity dup inputs =
     let
         third =
-            inputs |> Array.slice 0 -2 |> last
+            inputs |> Array.slice 0 -3 |> last
     in
     case ( third, last inputs ) of
         ( Just prev, Just next ) ->
