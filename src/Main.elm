@@ -189,7 +189,7 @@ stage7 : String
 stage7 =
     """
 bbb      xE   b
-bbx  xxx xxxx x
+bbx  xxb xxxx x
 bS x  x  x    b
 b   x b xbx xbb
 b   x b  xx   x
