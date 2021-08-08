@@ -218,7 +218,7 @@ stage9 =
 bbx    x    
 xxx xb x xx 
      b   x  
- xxxbSbxxx x
+ xxxbSbxxx b
       xx   x
 bxxxxxbx xxb
 E         xb

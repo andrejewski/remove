@@ -5728,7 +5728,7 @@ var $author$project$Main$stage5 = '\nbbbxxxxxxxxxxxxxxx\nbS  xb   b    xE b\nb  
 var $author$project$Main$stage6 = '\nxxxxxxxxxxxxxxxxb\n   x         x  S\n b b  xxbx xx    \n x   x     x  xbb\n xxbxx bxxb  xbbb\n Ex          xbbb\n';
 var $author$project$Main$stage7 = '\nbbb      xE   b\nbbx  xxb xxxx x\nbS x  x  x    b\nb   x b xbx xbb\nb   x b  xx   x\nb  x  x    x  b\nb  x b x b x  b\nbx   x   x   xb\n';
 var $author$project$Main$stage8 = '\nbx   x   x   xb\nb  x x x x b  x\nbS b   b   xx b\nbxxbxxxbxxxbx x\nbE b   b   xx b\nb  x x x x b  x\nbx   x   x   xb\n';
-var $author$project$Main$stage9 = '\nbbx    x    \nxxx xb x xx \n     b   x  \n xxxbSbxxx x\n      xx   x\nbxxxxxbx xxb\nE         xb\n';
+var $author$project$Main$stage9 = '\nbbx    x    \nxxx xb x xx \n     b   x  \n xxxbSbxxx b\n      xx   x\nbxxxxxbx xxb\nE         xb\n';
 var $author$project$Main$stageHoles = '\nE bbbbbbbbbbb E\n  x         x  \nb  x   x   x  b\nbx x x x x x xb\nb             b\nbx x x S x x xb\nb             b\nbx x x x x x xb\nb  x   x   x  b\n  x         x  \nE bbbbbbbbbbb E\n    ';
 var $author$project$Main$twistDirection = function (dir) {
 	switch (dir) {
